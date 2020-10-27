@@ -12,7 +12,7 @@ public class ConnectionFactory {
             Class.forName("org.postgresql.Driver");
             System.out.println("Conectou!");
             return DriverManager.getConnection(
-             "jdbc:postgresql://localhost:5432/SysPizza","postgres","9870");              
+             "jdbc:postgresql://localhost:5432/SysPizza","postgres","2603");              
         }catch(Exception ex){
            throw new Exception("Erro ao conectar"
                 + ex.getMessage());

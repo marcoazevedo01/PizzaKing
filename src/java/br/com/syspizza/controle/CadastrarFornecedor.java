@@ -3,6 +3,7 @@ package br.com.syspizza.controle;
 import br.com.syspizza.dao.FornecedorDAO;
 import br.com.syspizza.dao.GenericDAO;
 import br.com.syspizza.modelo.Fornecedor;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -11,22 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author neto
- */
 @WebServlet(name = "CadastrarFornecedor", urlPatterns = {"/CadastrarFornecedor"})
 public class CadastrarFornecedor extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -49,32 +37,40 @@ public class CadastrarFornecedor extends HttpServlet {
 
             GenericDAO dao = new FornecedorDAO();
 
-            if (idPessoa.equals("")) {
+            if (ValidaCNPJ.isCNPJ(cnpj) == true) {
+                if (idPessoa.equals("")) {
 
-                if (dao.cadastrar(fornecedor)) {
-                    mensagem = "fornecedor cadastrado com sucesso";
+                    if (dao.cadastrar(fornecedor)) {
+                        mensagem = "fornecedor cadastrado com sucesso";
+                    } else {
+                        mensagem = "Erro ao cadastrar fornecedor";
+                    }
+                    request.setAttribute("msg", mensagem);
+                    request.getRequestDispatcher("ListarFornecedor").forward(request, response);
+
                 } else {
-                    mensagem = "Erro ao cadastrar fornecedor";
-                }
-                request.setAttribute("msg", mensagem);
-                request.getRequestDispatcher("ListarFornecedor").forward(request, response);
-                
 
+                    fornecedor.setIdPessoa(Integer.parseInt(idPessoa));
+
+                    if (dao.alterar(fornecedor)) {
+                        mensagem = "fornecedor alterado com sucesso";
+                    } else {
+                        mensagem = "Erro ao alterar fornecedor";
+                    }
+
+                    request.setAttribute("msg", mensagem);
+                    request.setAttribute("idPessoa", idPessoa);
+                    request.getRequestDispatcher("ListarFornecedor").forward(request, response);
+
+                }
             } else {
-
-                fornecedor.setIdPessoa(Integer.parseInt(idPessoa));
-
-                if (dao.alterar(fornecedor)) {
-                    mensagem = "fornecedor alterado com sucesso";
-                } else {
-                    mensagem = "Erro ao alterar fornecedor";
-                }
-                
-                request.setAttribute("msg", mensagem);
-                request.setAttribute("idPessoa", idPessoa);
-                request.getRequestDispatcher("ListarFornecedor").forward(request, response);
-
+                System.out.println("akii");
+                    mensagem = "CNPJ invalido";
+                    request.setAttribute("msg", mensagem);
+                    request.setAttribute("idPessoa", idPessoa);
+                    request.getRequestDispatcher("ListarFornecedor").forward(request, response);
             }
+
         } catch (Exception e) {
             System.out.println("Erro ao cadastrar fornecedorCTR " + e.getMessage());
         }
