@@ -29,19 +29,62 @@
                         </div>  
                         <div class="form-group">   
                             <label for="telefone">Cpf:</label>
-                            <input value="${cliente.cpf}" type="text" class="form-control"  name="cpf" id="cpf" required="true"/><br>
+                            <input value="${cliente.cpf}" type="text" class="form-control"  name="cpf" id="cpf" onblur="TestaCPF(this)" required="true"/><br>
                         </div>  
                 </div>  
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <input type="submit" class="btn btn-success" value="Salvar"/>
+                    <input type="submit" id="btn-modal-salvar" class="btn btn-success" value="Salvar"/>
                 </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    let btn = document.getElementById('btn-modal-salvar');
+    function TestaCPF(strCPF) {
+        var elem = strCPF;
+        strCPF = strCPF.value.replace(/\D/g, '');
+        var Soma;
+        var Resto;
+        Soma = 0;
+        if (strCPF == "00000000000")
+            return stop(elem)
 
+        for (i = 1; i <= 9; i++)
+            Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+        Resto = (Soma * 10) % 11;
+
+        if ((Resto == 10) || (Resto == 11))
+            Resto = 0;
+        if (Resto != parseInt(strCPF.substring(9, 10)))
+            return stop(elem)
+
+        Soma = 0;
+        for (i = 1; i <= 10; i++)
+            Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+        Resto = (Soma * 10) % 11;
+
+        if ((Resto == 10) || (Resto == 11))
+            Resto = 0;
+        if (Resto != parseInt(strCPF.substring(10, 11)))
+            return stop(elem)
+        return proceed()
+    }
+
+    function stop(elem) {      
+        $("#cpf").next("label").attr('data-error', 'cpf');
+        $("#cpf").addClass("bg-danger");
+        btn.disabled = true;
+        elem.focus();
+    }
+    
+    function proceed(){
+        $("#cpf").removeClass("bg-danger");
+         btn.disabled = false;
+    }
+</script>
 
 
 

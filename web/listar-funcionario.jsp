@@ -59,14 +59,29 @@
 
 <jsp:include page="/template/modalRemov.jsp"/>
 <jsp:include page="/cadastrar-funcionario.jsp"/>
+<jsp:include page="/template/modalMsg.jsp"/>
 <script src="js/ajax.js"></script>
 <script type="text/javascript">
     document.querySelector('#tbody').addEventListener('click', event => {
         if (event.srcElement.dataset.type === 'excluir') {
             document.querySelector('#p-msg').textContent = 'Desenha realmente excluir o funcionario: ' + event.srcElement.dataset.name;
-            document.querySelector('#a-excluir').href = 'ExcluirFuncionario?id='+ event.srcElement.dataset.ref;
+            document.querySelector('#a-excluir').setAttribute('data-ref', event.srcElement.dataset.ref);
         }
     })
+     document.getElementById('a-excluir').addEventListener('click', event => {
+        console.log(event.toElement.dataset.ref);
+        let id = event.toElement.dataset.ref; 
+        ajaxDoc('ExcluirFuncionario?id=' + id, 'GET')
+            .then(msg => {
+                document.getElementById('func_'+id).remove();
+                $('#modalRemove').modal('hide');
+            })
+            .catch(err => alert('Erro ajax', err))  
+    });
+    
+    if('${msg}' != ''){
+        $('#modal-msg').modal('show');
+    }
  
     function getFuncionario(id) {
          ajaxDoc('CarregarFuncionario?id=' + id, 'GET')

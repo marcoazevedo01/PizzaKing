@@ -16,7 +16,7 @@
                         </div>
                         <div class="form-group">
                             <label for="cnpj">Cnpj:</label>
-                            <input type="text" name="cnpj" id="cnpj" value="${fornecedor.cnpj}" class="form-control" required/>
+                            <input type="text" name="cnpj" id="cnpj" value="${fornecedor.cnpj}" onblur="TestaCNPJ(this)" class="form-control" required/>
                         </div>
                         <div class="form-group">
                             <label for="email">E-mail:</label>
@@ -29,10 +29,79 @@
                 </div> 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <input type="submit" class="btn btn-success" value="Salvar" />
+                    <input type="submit" id="btn-modal-salvar" class="btn btn-success" value="Salvar" />
                 </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    let btn = document.getElementById('btn-modal-salvar');
+    function TestaCNPJ(cnpj) {
+        var elem = cnpj;
+        cnpj = cnpj.value.replace(/[^\d]+/g, '');
+
+        if (cnpj == '')
+            return stop(elem);
+
+        if (cnpj.length != 14)
+            return stop(elem);
+
+        // Elimina CNPJs invalidos conhecidos
+        if (cnpj == "00000000000000" ||
+                cnpj == "11111111111111" ||
+                cnpj == "22222222222222" ||
+                cnpj == "33333333333333" ||
+                cnpj == "44444444444444" ||
+                cnpj == "55555555555555" ||
+                cnpj == "66666666666666" ||
+                cnpj == "77777777777777" ||
+                cnpj == "88888888888888" ||
+                cnpj == "99999999999999")
+            return stop(elem);
+
+        // Valida DVs
+        tamanho = cnpj.length - 2
+        numeros = cnpj.substring(0, tamanho);
+        digitos = cnpj.substring(tamanho);
+        soma = 0;
+        pos = tamanho - 7;
+        for (i = tamanho; i >= 1; i--) {
+            soma += numeros.charAt(tamanho - i) * pos--;
+            if (pos < 2)
+                pos = 9;
+        }
+        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+        if (resultado != digitos.charAt(0))
+            return stop(elem);
+
+        tamanho = tamanho + 1;
+        numeros = cnpj.substring(0, tamanho);
+        soma = 0;
+        pos = tamanho - 7;
+        for (i = tamanho; i >= 1; i--) {
+            soma += numeros.charAt(tamanho - i) * pos--;
+            if (pos < 2)
+                pos = 9;
+        }
+        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+        if (resultado != digitos.charAt(1))
+            return stop(elem);
+
+        return proceed();
+
+    }
+    
+    function stop(elem) {      
+        $("#cnpj").next("label").attr('data-error', 'cpf');
+        $("#cnpj").addClass("bg-danger");
+        btn.disabled = true;
+        elem.focus();
+    }
+    
+    function proceed(){
+        $("#cnpj").removeClass("bg-danger");
+         btn.disabled = false;
+    }
+</script>                        

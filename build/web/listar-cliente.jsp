@@ -72,12 +72,11 @@
         }
     })
     document.getElementById('a-excluir').addEventListener('click', event => {
-        console.log(event.toElement.dataset.ref);
         let id = event.toElement.dataset.ref; 
         ajaxDoc('ExcluirCliente?id=' + id, 'GET')
             .then(msg => {
                 document.getElementById('cliente_'+id).remove();
-                $('#modalRemove').modal('hide')
+                $('#modalRemove').modal('hide');
             })
             .catch(err => alert('Erro ajax', err))  
     });

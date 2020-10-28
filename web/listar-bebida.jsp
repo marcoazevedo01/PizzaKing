@@ -42,7 +42,7 @@
             </thead>
             <tbody id="tbody">
                 <c:forEach items="${bebidas}" var="bebida">
-                    <tr>                    
+                    <tr id="bebida_${bebida.descricao}">                    
                         <td>${bebida.descricao}</td>
                         <td>${bebida.tipo}</td>
                         <td>${bebida.dataValidade}</td>
@@ -62,16 +62,30 @@
 </div>
 <jsp:include page="/cadastrar-bebida.jsp"/>
 <jsp:include page="/template/modalRemov.jsp"/>
+<jsp:include page="/template/modalMsg.jsp"/>
 <script src="js/ajax.js"></script>
 <script type="text/javascript">
     document.querySelector('#tbody').addEventListener('click', event => {
         if (event.srcElement.dataset.type === 'excluir') {
             document.querySelector('#p-msg').textContent = 'Desenha realmente excluir a bebida: ' + event.srcElement.dataset.name;
-            document.querySelector('#a-excluir').href = `ExcluirBebida?idProduto=` + event.srcElement.dataset.ref;
+            document.querySelector('#a-excluir').setAttribute('data-ref', event.srcElement.dataset.ref);
         }
     })
     
-     function getBebida(id) {
+    document.getElementById('a-excluir').addEventListener('click', event => {
+        let id = event.toElement.dataset.ref; 
+        ajaxDoc('ExcluirBebida?idProduto=' + id, 'GET')
+            .then(msg => {
+                document.getElementById('bebida_'+id).remove();
+                $('#modalRemove').modal('hide');
+            })
+            .catch(err => alert('Erro ajax', err))  
+    });
+    if('${msg}' != ''){
+        $('#modal-msg').modal('show');
+    } 
+    
+    function getBebida(id) {
         ajaxDoc('CarregarBebida?idProduto=' + id, 'GET')
             .then(msg => {
                 let form = document.getElementById('form-bebida');

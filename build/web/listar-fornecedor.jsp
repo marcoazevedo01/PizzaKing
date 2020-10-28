@@ -40,7 +40,7 @@
                 </thead>
                 <tbody id="tbody">
                     <c:forEach items="${fornecedores}" var="fornecedor">
-                        <tr>            
+                        <tr id="forn_${fornecedor.idPessoa}">            
                             <td>${fornecedor.nome}</td>
                             <td>${fornecedor.cnpj}</td>
                             <td>${fornecedor.email}</td>
@@ -67,14 +67,21 @@
     document.querySelector('#tbody').addEventListener('click', event => {
         if (event.srcElement.dataset.type === 'excluir') {
             document.querySelector('#p-msg').textContent = 'Desenha realmente excluir o fornecedor: ' + event.srcElement.dataset.name;
-            document.querySelector('#a-excluir').href = `ExcluirFornecedor?idPessoa=` + event.srcElement.dataset.ref;
+            document.querySelector('#a-excluir').setAttribute('data-ref', event.srcElement.dataset.ref);
         }
     })
-    
-     if('${msg}' != ''){
+    document.getElementById('a-excluir').addEventListener('click', event => {
+        let id = event.toElement.dataset.ref; 
+        ajaxDoc('ExcluirFornecedor?idPessoa=' + id, 'GET')
+            .then(msg => {
+                document.getElementById('forn_'+id).remove();
+                $('#modalRemove').modal('hide');
+            })
+            .catch(err => alert('Erro ajax', err))  
+    });
+    if('${msg}' != ''){
         $('#modal-msg').modal('show');
-    }
-    
+    }   
 
     function getFornecedor(id) {
         ajaxDoc('CarregarFornecedor?idPessoa=' + id, 'GET')
