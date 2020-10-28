@@ -61,6 +61,7 @@
 
 <jsp:include page="/cadastrar-fornecedor.jsp"/>
 <jsp:include page="/template/modalRemov.jsp"/>
+<jsp:include page="/template/modalMsg.jsp"/>
 <script src="js/ajax.js"></script>
 <script type="text/javascript">
     document.querySelector('#tbody').addEventListener('click', event => {
@@ -69,6 +70,11 @@
             document.querySelector('#a-excluir').href = `ExcluirFornecedor?idPessoa=` + event.srcElement.dataset.ref;
         }
     })
+    
+     if('${msg}' != ''){
+        $('#modal-msg').modal('show');
+    }
+    
 
     function getFornecedor(id) {
         ajaxDoc('CarregarFornecedor?idPessoa=' + id, 'GET')

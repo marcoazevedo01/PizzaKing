@@ -9,7 +9,7 @@
                 <h2 id="titulo-form">Clientes</h2>
             </div>
             <div>  
-                <button class="btn btn-success" data-toggle="modal" data-target="#modal-cliente" >Cadastrar</button>                   
+                <button class="btn btn-success" data-toggle="modal" data-target="#modal-cliente" >Cadastrar</button>                    
             </div>
         </div>
     </div>
@@ -42,7 +42,7 @@
             </thead>
             <tbody id="tbody">
                 <c:forEach var="cliente" items="${clientes}" >
-                    <tr>
+                    <tr id="cliente_${cliente.id}">
                         <td>${cliente.nome}</td>
                         <td>${cliente.email}</td>
                         <td>${cliente.senha}</td>
@@ -62,15 +62,30 @@
 </div>
 <jsp:include page="/cadastrar-cliente.jsp"/>
 <jsp:include page="/template/modalRemov.jsp"/>
+<jsp:include page="/template/modalMsg.jsp"/>
 <script src="js/ajax.js"></script>
 <script type="text/javascript">
     document.querySelector('#tbody').addEventListener('click', event => {
         if (event.srcElement.dataset.type === 'excluir') {
             document.querySelector('#p-msg').textContent = 'Desenha realmente excluir o cliente: ' + event.srcElement.dataset.name;
-            document.querySelector('#a-excluir').href = `ExcluirCliente?id=` + event.srcElement.dataset.ref;
+            document.querySelector('#a-excluir').setAttribute('data-ref', event.srcElement.dataset.ref);
         }
     })
-
+    document.getElementById('a-excluir').addEventListener('click', event => {
+        console.log(event.toElement.dataset.ref);
+        let id = event.toElement.dataset.ref; 
+        ajaxDoc('ExcluirCliente?id=' + id, 'GET')
+            .then(msg => {
+                document.getElementById('cliente_'+id).remove();
+                $('#modalRemove').modal('hide')
+            })
+            .catch(err => alert('Erro ajax', err))  
+    });
+    
+    if('${msg}' != ''){
+        $('#modal-msg').modal('show');
+    }
+    
     function getCliente(id) {
         ajaxDoc('CarregarCliente?id=' + id, 'GET')
             .then(msg => {

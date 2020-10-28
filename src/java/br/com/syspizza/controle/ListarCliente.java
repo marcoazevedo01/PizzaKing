@@ -29,10 +29,8 @@ public class ListarCliente extends HttpServlet {
             if(tipo.equals("nome")){
                     request.setAttribute("clientes", dao.listarPorNome(pesquisa));                    
             } else {
-
                     request.setAttribute("clientes", dao.listarPorCodigo(Integer.parseInt(pesquisa)));
             }
-
             request.getRequestDispatcher("listar-cliente.jsp").forward(request, response);
         } catch (Exception e) {
             System.out.println("Erro ao listar clienteCTR " + e.getMessage());

@@ -1,5 +1,6 @@
 package br.com.syspizza.controle;
 
+import Validacao.ValidaCNPJ;
 import br.com.syspizza.dao.FornecedorDAO;
 import br.com.syspizza.dao.GenericDAO;
 import br.com.syspizza.modelo.Fornecedor;
@@ -37,7 +38,8 @@ public class CadastrarFornecedor extends HttpServlet {
 
             GenericDAO dao = new FornecedorDAO();
 
-            if (ValidaCNPJ.isCNPJ(cnpj) == true) {
+            if (ValidaCNPJ.isCNPJ(request.getParameter("cnpj")) == true) {
+                System.out.println("passou");
                 if (idPessoa.equals("")) {
 
                     if (dao.cadastrar(fornecedor)) {
@@ -64,10 +66,8 @@ public class CadastrarFornecedor extends HttpServlet {
 
                 }
             } else {
-                System.out.println("akii");
                     mensagem = "CNPJ invalido";
-                    request.setAttribute("msg", mensagem);
-                    request.setAttribute("idPessoa", idPessoa);
+                    request.setAttribute("msg", mensagem);          
                     request.getRequestDispatcher("ListarFornecedor").forward(request, response);
             }
 

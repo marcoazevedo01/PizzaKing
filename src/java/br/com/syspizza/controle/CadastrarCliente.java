@@ -1,5 +1,6 @@
 package br.com.syspizza.controle;
 
+import Validacao.ValidaCPF;
 import br.com.syspizza.dao.ClienteDAO;
 import br.com.syspizza.dao.GenericDAO;
 import br.com.syspizza.modelo.Cliente;
@@ -16,42 +17,46 @@ public class CadastrarCliente extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        try{
+
+        try {
             String id = request.getParameter("id");
-            
+
             Cliente cliente = new Cliente();
-             
+
             cliente.setNome(request.getParameter("nome"));
             cliente.setEmail(request.getParameter("email"));
             cliente.setSenha(request.getParameter("senha"));
             cliente.setTelefone(request.getParameter("telefone"));
             cliente.setCpf(request.getParameter("cpf"));
-            
+
             GenericDAO dao = new ClienteDAO();
             String mensagem = "";
             
-            if(id.equals("")){
-                if(dao.cadastrar(cliente)){
-                    mensagem = "Cliente cadastrado com sucesso";
+            if (ValidaCPF.isCPF(request.getParameter("cpf")) == true) {
+                if (id.equals("")) {
+                    if (dao.cadastrar(cliente)) {
+                        mensagem = "Cliente cadastrado com sucesso";
+                    } else {
+                        mensagem = "Erro ao cadastrar cliente";
+                    }
+                } else {
+                    cliente.setId(Integer.parseInt(id));
+                    if (dao.alterar(cliente)) {
+                        mensagem = "Cliente alterado com sucesso!";
+                    } else {
+                        mensagem = "Erro ao alterar Cliente!";
+                    }
+                }
+                request.setAttribute("msg", mensagem);
+                request.getRequestDispatcher("ListarCliente").forward(request, response);
 
-                }else{
-                    mensagem = "Erro ao cadastrar cliente";
-                }
-            }else{
-                cliente.setId(Integer.parseInt(id));
-                if(dao.alterar(cliente)){
-                   mensagem = "Cliente alterado com sucesso!"; 
-                }else{
-                   mensagem = "Erro ao alterar Cliente!";
-                }
-            }
-            request.setAttribute("msg", mensagem);
-            request.getRequestDispatcher(
-                "/ListarCliente").forward(request, response);
-        }catch(Exception e){
-            System.out.println("Erro ao cadastrar clienteCTR " 
-                    + e.getMessage());
+            } else {            
+                mensagem = "CPF invalido";
+                request.setAttribute("msg", mensagem);
+                request.getRequestDispatcher("ListarCliente").forward(request, response);
+            }     
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar clienteCTR "+ e.getMessage());
         }
     }
 

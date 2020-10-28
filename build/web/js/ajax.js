@@ -19,14 +19,3 @@ function ajaxDoc(url, method) {
             });
     })
 }
-
-var config = { attributes: true};
-var target = document.querySelector('body');
-var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-        if(mutation.target.classList.value == ''){
-            window.location.reload()
-        }
-    });    
-});
-observer.observe(target, config);

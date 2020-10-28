@@ -30,8 +30,7 @@ public class ExcluirCliente extends HttpServlet {
             }
 
             request.setAttribute("msg", mensagem);
-            request.getRequestDispatcher(
-                    "ListarCliente").forward(request, response);
+            request.getRequestDispatcher("ListarCliente").forward(request, response);
 
         } catch (Exception e) {
             System.out.println(
