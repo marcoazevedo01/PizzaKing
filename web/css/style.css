@@ -160,9 +160,7 @@ section::before, section::after {
 }
 .parallax {
     background: url(../img/parallax1.jpg) fixed no-repeat center center;
-    -webkit-background-size: /*@@prefixmycss->No equivalent*/;
     -moz-background-size: cover;
-    -o-background-size: /*@@prefixmycss->No equivalent*/;
     background-size: cover;
     position: relative;
     color: #FFF;

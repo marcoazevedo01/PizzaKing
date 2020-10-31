@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,8 +37,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="index.jsp#food-menu">Cardápio</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="dashboard.jsp">Dashboard</a>
+                        <li class="nav-item">  
+                        <c:if test="${sessao.nome == null}">
+                             <a class="nav-link" href="#" data-toggle="modal" data-target="#modal-login">Login</a>
+                        </c:if>
+                        
+                               
+                        
                         </li>
                     </ul>
                 </div>

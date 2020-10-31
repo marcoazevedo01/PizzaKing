@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <div class="container col-lg-6 col-md-9 col-sm-6">
-                    <form id="form-forn" class="form-group-lg" method="POST" action="CadastrarFornecedor">
+                    <form id="form-fornecedor" class="form-group-lg" method="POST" action="CadastrarFornecedor">
                         <div class="form-group">
                             <input type="hidden" name="idPessoa" value="${fornecedor.idPessoa}"/>
                             <label for="nome">Nome:</label>

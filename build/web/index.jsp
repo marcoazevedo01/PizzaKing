@@ -1,4 +1,5 @@
 <jsp:include page="/template/nav.jsp"/>
+<jsp:include page="/template/login.jsp" />
 <div id="header">
     <div class="bg-overlay"></div>
     <div class="center text-center">

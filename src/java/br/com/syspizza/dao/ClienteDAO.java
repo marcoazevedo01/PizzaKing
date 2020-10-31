@@ -223,5 +223,32 @@ public class ClienteDAO implements GenericDAO {
         }
         return lista;
     }
+    
+     public Object logar(Object object) throws Exception{
+        
+        Cliente oCliente = (Cliente) object;
+        
+        try{
+            String sql = "select * from cliente where email = ? and senha = ?;";
+            stmt = this.conn.prepareStatement(sql);
+            
+            stmt.setString(1, oCliente.getEmail());
+            stmt.setString(2, oCliente.getSenha());
+            
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                oCliente.setId(rs.getInt("id"));
+                oCliente.setNome(rs.getString("nome"));
+            }
+            
+        }catch(Exception e){
+            System.out.println("Erro ao logarDAO " + e.getMessage());
+        }finally{
+            ConnectionFactory.fecharConexao(conn, stmt, rs);
+        }
+        return oCliente;
+    }
+    
 
 }
