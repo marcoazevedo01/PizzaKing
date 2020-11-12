@@ -21,6 +21,9 @@
             <div class="card">
                 <a href="ListarBebida" class="list-group-item list-group-item-action bg-light">Gerenciar Bebida</a> 
             </div>
+             <div class="card">
+                <a href="Sair" class="list-group-item list-group-item-action bg-light">Sair</a> 
+            </div>
         </div>
     </div>
 </div>

@@ -29,14 +29,10 @@ public class Logar extends HttpServlet {
             
             Cliente clienteLogado = (Cliente) dao.logar(oCliente);
             
-            if(clienteLogado.getId() != null){
-            
-
-                // criando uma sessão
+            if(clienteLogado.getId() != null){           
                 HttpSession sessao = request.getSession(true);
                 sessao.setAttribute("nome", clienteLogado.getNome());
-                
-                
+                          
                 request.getRequestDispatcher("dashboard.jsp").forward(request, response);
             }else{
                 request.setAttribute("msg", "E-mail ou senha incorretos!");

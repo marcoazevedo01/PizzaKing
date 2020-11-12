@@ -48,12 +48,12 @@ public class CadastrarCliente extends HttpServlet {
                     }
                 }
                 request.setAttribute("msg", mensagem);
-                request.getRequestDispatcher("ListarCliente").forward(request, response);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
 
             } else {            
                 mensagem = "CPF invalido";
                 request.setAttribute("msg", mensagem);
-                request.getRequestDispatcher("ListarCliente").forward(request, response);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }     
         } catch (Exception e) {
             System.out.println("Erro ao cadastrar clienteCTR "+ e.getMessage());

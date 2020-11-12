@@ -86,7 +86,7 @@
     function getFornecedor(id) {
         ajaxDoc('CarregarFornecedor?idPessoa=' + id, 'GET')
             .then(msg => {
-                let form = document.getElementById('form-forn');
+                let form = document.getElementById('form-fornecedor');
                 form.idPessoa.value =  msg.idPessoa;
                 form.nome.value =  msg.nome;
                 form.cnpj.value =  msg.cnpj;

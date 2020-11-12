@@ -42,7 +42,7 @@
             </thead>
             <tbody id="tbody">
                 <c:forEach items="${bebidas}" var="bebida">
-                    <tr id="bebida_${bebida.descricao}">                    
+                    <tr id="bebida_${bebida.idProduto}">                    
                         <td>${bebida.descricao}</td>
                         <td>${bebida.tipo}</td>
                         <td>${bebida.dataValidade}</td>

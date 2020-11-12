@@ -37,13 +37,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="index.jsp#food-menu">Cardápio</a>
                         </li>
-                        <li class="nav-item">  
-                        <c:if test="${sessao.nome == null}">
-                             <a class="nav-link" href="#" data-toggle="modal" data-target="#modal-login">Login</a>
-                        </c:if>
-                        
-                               
-                        
+                        <li class="nav-item">                 
+                            <a class="nav-link" href="dashboard">Login</a> 
                         </li>
                     </ul>
                 </div>
