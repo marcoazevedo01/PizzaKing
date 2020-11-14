@@ -106,7 +106,7 @@ public class FiltroURL implements Filter {
         try {
             HttpServletRequest req = (HttpServletRequest) request;
             String url = req.getRequestURI();
-            String[] excecoes = {"/","*.css","*.js","*.png","*.jpg","index.jsp","Logar","CadastrarCliente"}; 
+            String[] excecoes = {".woff",".ico",".css",".js",".png",".jpg",".jpeg","/","index.jsp","Logar","CadastrarCliente"}; 
             Boolean libera = false;
             
             for(String item : excecoes){
