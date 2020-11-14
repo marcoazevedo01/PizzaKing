@@ -32,7 +32,7 @@ public class CarregarBebida extends HttpServlet {
             
             Gson gson = new Gson();
             String json = gson.toJson(dao.carregar(idProduto));
-       
+          
             response.setContentType("json");
             PrintWriter out = response.getWriter();
             out.write(json);

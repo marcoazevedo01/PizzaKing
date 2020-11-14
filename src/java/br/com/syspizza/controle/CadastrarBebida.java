@@ -8,6 +8,7 @@ package br.com.syspizza.controle;
 import br.com.syspizza.dao.BebidaDAO;
 import br.com.syspizza.dao.GenericDAO;
 import br.com.syspizza.modelo.Bebida;
+import br.com.syspizza.util.manipulaData;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -48,7 +49,7 @@ public class CadastrarBebida extends HttpServlet {
 
             bebida.setDescricao(descricao);
             bebida.setTipo(tipo);
-            bebida.setDataValidade(dataValidade);
+            bebida.setDataValidade(manipulaData.convertToDate(dataValidade));
             bebida.setMedida(medida);
             bebida.setValor(valor);
 

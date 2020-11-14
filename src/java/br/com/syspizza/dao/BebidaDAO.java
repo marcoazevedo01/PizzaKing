@@ -68,7 +68,7 @@ public class BebidaDAO implements GenericDAO {
                 bebida.setIdProduto(rs.getInt("idproduto"));
                 bebida.setTipo(rs.getString("tipo"));
                 bebida.setDescricao(rs.getString("descricao"));
-                bebida.setDataValidade(rs.getString("datavalidade"));
+                bebida.setDataValidade(rs.getDate("datavalidade"));
                 bebida.setMedida(rs.getDouble("medida"));
                 bebida.setValor(rs.getDouble("valor"));
 
@@ -102,7 +102,7 @@ public class BebidaDAO implements GenericDAO {
             bebida.setIdProduto(rs.getInt("idproduto"));
             bebida.setDescricao(rs.getString("descricao"));
             bebida.setTipo(rs.getString("tipo"));
-            bebida.setDataValidade(rs.getString("datavalidade"));
+            bebida.setDataValidade(rs.getDate("datavalidade"));
             bebida.setMedida(rs.getDouble("medida"));
             bebida.setValor(rs.getDouble("valor"));
 
@@ -187,7 +187,7 @@ public class BebidaDAO implements GenericDAO {
                 bebida.setIdProduto(rs.getInt("idproduto"));
                 bebida.setDescricao(rs.getString("descricao"));
                 bebida.setTipo(rs.getString("tipo"));
-                bebida.setDataValidade(rs.getString("datavalidade"));
+                bebida.setDataValidade(rs.getDate("datavalidade"));
                 bebida.setMedida(rs.getDouble("medida"));
                 bebida.setValor(rs.getDouble("valor"));
 
@@ -222,7 +222,7 @@ public class BebidaDAO implements GenericDAO {
                 bebida.setIdProduto(rs.getInt("idproduto"));
                 bebida.setDescricao(rs.getString("descricao"));
                 bebida.setTipo(rs.getString("tipo"));
-                bebida.setDataValidade(rs.getString("datavalidade"));
+                bebida.setDataValidade(rs.getDate("datavalidade"));
                 bebida.setMedida(rs.getDouble("medida"));
                 bebida.setValor(rs.getDouble("valor"));
 

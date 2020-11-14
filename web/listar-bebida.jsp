@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/template/nav.jsp" />
 <jsp:include page="/template/menu.jsp" />
@@ -45,7 +46,9 @@
                     <tr id="bebida_${bebida.idProduto}">                    
                         <td>${bebida.descricao}</td>
                         <td>${bebida.tipo}</td>
-                        <td>${bebida.dataValidade}</td>
+                        <td>
+                            <fmt:formatDate type="date" value="${bebida.dataValidade}" pattern="dd/MM/yyyy"></fmt:formatDate>
+                        </td>
                         <td>${bebida.medida}</td>
                         <td>${bebida.valor}</td>
                         <td>                    
@@ -87,12 +90,12 @@
     
     function getBebida(id) {
         ajaxDoc('CarregarBebida?idProduto=' + id, 'GET')
-            .then(msg => {
+            .then(msg => {             
                 let form = document.getElementById('form-bebida');
                 form.idProduto.value =  msg.idProduto;
                 form.descricao.value =  msg.descricao;
                 form.tipo.value =  msg.tipo;
-                form.dataValidade.value =  msg.dataValidade;
+                form.dataValidade.value = new Date(msg.dataValidade).toISOString().substr(0, 10)
                 form.medida.value =  msg.medida;
                 form.valor.value =  msg.valor;      
                 document.getElementById('label-modal-bebida').textContent = 'Alterar Bebida';    

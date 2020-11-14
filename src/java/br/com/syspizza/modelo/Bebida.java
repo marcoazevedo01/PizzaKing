@@ -1,6 +1,9 @@
 package br.com.syspizza.modelo;
 
 // SUBCLASSE OU CLASSE FILHA
+
+import java.util.Date;
+
 public class Bebida extends Produto{
     
     private Integer idBebida;
@@ -9,7 +12,7 @@ public class Bebida extends Produto{
     public Bebida() {
     }
 
-    public Bebida(Integer idBebida, String tipo, Integer idProduto, String descricao, String dataValidade, Double medida, Double valor) {
+    public Bebida(Integer idBebida, String tipo, Integer idProduto, String descricao, Date dataValidade, Double medida, Double valor) {
         super(idProduto, descricao, dataValidade, medida, valor);
         this.idBebida = idBebida;
         this.tipo = tipo;

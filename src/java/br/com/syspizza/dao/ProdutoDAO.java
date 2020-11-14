@@ -33,7 +33,7 @@ public class ProdutoDAO {
             stmt = this.conn.prepareStatement(sql);
 
             stmt.setString(1, produto.getDescricao());
-            stmt.setString(2, produto.getDataValidade());
+            stmt.setDate(2, new java.sql.Date(produto.getDataValidade().getTime()));
             stmt.setDouble(3, produto.getMedida());
             stmt.setDouble(4, produto.getValor());
 
@@ -80,7 +80,7 @@ public class ProdutoDAO {
            
            stmt = this.conn.prepareStatement(sql);
            stmt.setString(1, produto.getDescricao());
-           stmt.setString(2, produto.getDataValidade());
+           stmt.setDate(2, new java.sql.Date(produto.getDataValidade().getTime()));
            stmt.setDouble(3, produto.getMedida());
            stmt.setDouble(4, produto.getValor());
            stmt.setInt(5, produto.getIdProduto());

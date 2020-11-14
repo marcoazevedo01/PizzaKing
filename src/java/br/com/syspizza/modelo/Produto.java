@@ -1,18 +1,21 @@
 package br.com.syspizza.modelo;
 
 // SUPER CLASSE OU CLASSE PAI
+
+import java.util.Date;
+
 public class Produto {
     
     private Integer idProduto;
     private String descricao;
-    private String dataValidade;
+    private Date dataValidade;
     private Double medida;
     private Double valor;
 
     public Produto() {
     }
 
-    public Produto(Integer idProduto, String descricao, String dataValidade, Double medida, Double valor) {
+    public Produto(Integer idProduto, String descricao, Date dataValidade, Double medida, Double valor) {
         this.idProduto = idProduto;
         this.descricao = descricao;
         this.dataValidade = dataValidade;
@@ -36,11 +39,11 @@ public class Produto {
             this.descricao = descricao;   
     }
 
-    public String getDataValidade() {
+    public Date getDataValidade() {
         return dataValidade;
     }
 
-    public void setDataValidade(String dataValidade) {
+    public void setDataValidade(Date dataValidade) {
         this.dataValidade = dataValidade;
     }
 
