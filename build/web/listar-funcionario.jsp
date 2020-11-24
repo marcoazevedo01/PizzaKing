@@ -5,7 +5,7 @@
 <div class="container col-md-9 pt-3">
     <div class="col-md-12">
         <div class="row">
-            <div class="col-9 col-md-9">
+            <div class="col-8 col-md-9">
                 <h1 id="titulo-form">Funcionários</h1>
             </div>
             <div>
@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    <div class="container text-center">
+    <div class="container col-md-12 text-center">
         <div class="col-md-12 pt-4 ">
             <form action="ListarFuncionario" method="POST">
                 <div class="input-group ">
@@ -27,7 +27,7 @@
             </form>
         </div>
     </div>
-    <div class="table-responsive maxHeightTable pt-5">
+    <div class="table-responsive maxHeightTable pt-3">
         <table class="table table-striped table-bordered">
             <thead>
                 <tr id="table">                

@@ -193,14 +193,14 @@ public class ClienteDAO implements GenericDAO {
         return lista;
     }
 
-    public List<Object> listarPorCodigo(Integer pesquisa) throws Exception {
+    public List<Object> listarPorCpf(String pesquisa) throws Exception {
 
         List<Object> lista = new ArrayList<>();
 
         try {
-            String sql = "select * from cliente where id = ?;";
+            String sql = "select * from cliente where cpf = ?;";
             stmt = this.conn.prepareStatement(sql);
-            stmt.setInt(1, pesquisa);
+            stmt.setString(1, pesquisa);
             rs = stmt.executeQuery();
 
             while (rs.next()) {

@@ -7,7 +7,7 @@
                 <h2 id="label-modal-forn" class="col-md-12 container">Cadastro de Fornecedor</h2>      
             </div>
             <div class="modal-body">
-                <div class="container col-lg-6 col-md-9 col-sm-6">
+                <div class="container col-lg-12 col-md-9 col-sm-9">
                     <form id="form-fornecedor" class="form-group-lg" method="POST" action="CadastrarFornecedor">
                         <div class="form-group">
                             <input type="hidden" name="idPessoa" value="${fornecedor.idPessoa}"/>

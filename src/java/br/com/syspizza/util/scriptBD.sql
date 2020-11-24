@@ -14,13 +14,14 @@ create table cliente(
     email varchar(100),
     senha varchar(20),
     telefone varchar(30),
+    status Boolean,
     constraint pk_cliente primary key (id)
 );
 
 create table produto(
     idProduto serial,
     descricao varchar(100),
-    dataValidade varchar(50),
+    dataValidade date,
     medida numeric(10,2),
     valor numeric(10,2),
     constraint pk_produto primary key (idProduto)
@@ -34,5 +35,3 @@ create table bebida(
     constraint fk_bebida_produto foreign key (idProduto)
         references produto (idProduto)
 );
-
-

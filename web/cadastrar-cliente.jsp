@@ -7,7 +7,7 @@
                 <h2 id="label-modal-client" class="col-md-12 container">Cadastro de Cliente</h2>
             </div>
             <div class="modal-body">
-                <div class="container col-lg-6 col-md-9 col-sm-6">
+                <div class="container col-lg-12 col-md-9 col-sm-9">
                     <form id="form-client" class="form-group-lg" action="CadastrarCliente" method="POST">
 
                         <div class="form-group">  

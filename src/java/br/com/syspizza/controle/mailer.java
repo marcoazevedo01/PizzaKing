@@ -1,39 +1,47 @@
 package br.com.syspizza.controle;
 
-import br.com.syspizza.dao.ClienteDAO;
-import br.com.syspizza.dao.GenericDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.SimpleEmail;
 
-@WebServlet(name = "ListarCliente", urlPatterns = {"/ListarCliente"})
-public class ListarCliente extends HttpServlet {
+@WebServlet(name = "mailer", urlPatterns = {"/mailer"})
+public class mailer extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+        String host = "smtp.gmail.com";
+        String user = "syspizzafatec@gmail.com";//change accordingly  
+        String password = "FatecJales2020";//change accordingly  
+
+
         try {
-            String tipo = request.getParameter("tipo");
-            String pesquisa = request.getParameter("pesquisa");
-            ClienteDAO dao = new ClienteDAO();
-            
-            if(pesquisa == null){
-                request.setAttribute("clientes", dao.listar());
-                request.getRequestDispatcher("listar-cliente.jsp").forward(request, response);
-            }
-            
-            if(tipo.equals("nome")){
-                    request.setAttribute("clientes", dao.listarPorNome(pesquisa));                    
-            } else {
-                   // request.setAttribute("clientes", dao.listarPorCodigo(Integer.parseInt(pesquisa)));
-            }
-            request.getRequestDispatcher("listar-cliente.jsp").forward(request, response);
+            String email = request.getParameter("email");
+            String cpf = request.getParameter("cpf");
+            SimpleEmail envioEmail = new SimpleEmail();
+           
+            envioEmail.setHostName("smtp.umbler.com");
+            envioEmail.setSmtpPort(587);
+            envioEmail.setAuthenticator(new DefaultAuthenticator("marco@bytecodesoft.com.br", "321321a321!"));
+            envioEmail.setFrom("marco@bytecodesoft.com.br");
+            //envioEmail.setSSL(true);
+            //envioEmail.setTLS(true);
+            //envioEmail.setDebug(true);
+            envioEmail.setCharset(HtmlEmail.ISO_8859_1);
+            envioEmail.addTo(email);
+            envioEmail.setSubject("Contato - Syspizza");
+            envioEmail.setMsg("Email de verificacao click no link para ativar a conta:  http://localhost:8080/PizzaKing/returnMailer?id="+cpf);
+            envioEmail.send();
+            request.setAttribute("msg", "Messagem enviada ao email");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         } catch (Exception e) {
-            System.out.println("Erro ao listar clienteCTR " + e.getMessage());
+            System.out.println("Erro no mailer" + e.getMessage());
         }
     }
 

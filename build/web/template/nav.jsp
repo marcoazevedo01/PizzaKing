@@ -25,8 +25,8 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <div class="hidden-xs" id="logo">
-                        <a href="#header">
+                    <div class="hidden-xs " id="logo">
+                        <a href="dashboard">
                             <img src="img/logo.png" alt="">
                         </a>
                     </div>

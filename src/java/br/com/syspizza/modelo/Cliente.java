@@ -8,17 +8,19 @@ public class Cliente {
     private String senha;
     private String telefone;
     private String cpf;
+    private Boolean status;
 
     public Cliente() {
     }
 
-    public Cliente(Integer id, String nome, String email, String senha, String telefone, String cpf) {
+    public Cliente(Integer id, String nome, String email, String senha, String telefone, String cpf, Boolean status) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
         this.cpf = cpf;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -67,6 +69,14 @@ public class Cliente {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+    
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
     
     

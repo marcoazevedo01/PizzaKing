@@ -28,6 +28,7 @@ public class CadastrarCliente extends HttpServlet {
             cliente.setSenha(request.getParameter("senha"));
             cliente.setTelefone(request.getParameter("telefone"));
             cliente.setCpf(request.getParameter("cpf"));
+            cliente.setStatus(false);
 
             GenericDAO dao = new ClienteDAO();
             String mensagem = "";
@@ -47,8 +48,8 @@ public class CadastrarCliente extends HttpServlet {
                         mensagem = "Erro ao alterar Cliente!";
                     }
                 }
-                request.setAttribute("msg", mensagem);
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                //request.setAttribute("msg", mensagem); 
+                request.getRequestDispatcher("mailer").forward(request, response);
 
             } else {            
                 mensagem = "CPF invalido";

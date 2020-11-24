@@ -7,7 +7,7 @@
                 <h2 id="label-modal-bebida" class="col-md-12 container">Cadastro de bebidas</h2>         
             </div>
             <div class="modal-body">
-                <div class="container col-lg-6 col-md-9 col-sm-6">
+                <div class="container col-lg-12 col-md-9 col-sm-9">
                     <form id="form-bebida" class="form-group-lg" method="POST" action="CadastrarBebida">
                         <div class="form-group">
                             <input type="hidden" name="idProduto" value="${bebida.idProduto}"/>
