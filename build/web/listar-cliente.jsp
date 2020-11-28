@@ -32,8 +32,7 @@
             <thead>
                 <tr id="table">               
                     <th>Nome</th>
-                    <th>Email</th>
-                    <th>Senha</th>
+                    <th>Email</th>             
                     <th>Telefone</th>
                     <th>Cpf</th>
                     <th>Editar</th>
@@ -45,7 +44,6 @@
                     <tr id="cliente_${cliente.id}">
                         <td>${cliente.nome}</td>
                         <td>${cliente.email}</td>
-                        <td>${cliente.senha}</td>
                         <td>${cliente.telefone}</td>
                         <td>${cliente.cpf}</td>
                         <td>

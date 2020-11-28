@@ -16,11 +16,6 @@ public class mailer extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String host = "smtp.gmail.com";
-        String user = "syspizzafatec@gmail.com";//change accordingly  
-        String password = "FatecJales2020";//change accordingly  
-
-
         try {
             String email = request.getParameter("email");
             String cpf = request.getParameter("cpf");
@@ -36,7 +31,7 @@ public class mailer extends HttpServlet {
             envioEmail.setCharset(HtmlEmail.ISO_8859_1);
             envioEmail.addTo(email);
             envioEmail.setSubject("Contato - Syspizza");
-            envioEmail.setMsg("Email de verificacao click no link para ativar a conta:  http://localhost:8080/PizzaKing/returnMailer?id="+cpf);
+            envioEmail.setMsg("Email de verificacao click no link para ativar sua conta:  http://localhost:8080/PizzaKing/returnMailer?id="+cpf);
             envioEmail.send();
             request.setAttribute("msg", "Messagem enviada ao email");
             request.getRequestDispatcher("index.jsp").forward(request, response);

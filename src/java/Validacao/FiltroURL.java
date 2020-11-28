@@ -111,18 +111,23 @@ public class FiltroURL implements Filter {
             
             for(String item : excecoes){
                 if(url.endsWith(item)){
+                    req.setAttribute("acesso", "dashboard");
                     libera = true;
                 }
             }
             
+            // 
+            //        
+            
             HttpSession sessao = (HttpSession) req.getSession();
             if(sessao.getAttribute("nome") != null){
                 libera = true;
+                req.setAttribute("acesso", "Sair");
             }
             
-            if(libera == true){
+            if(libera == true){    
                 chain.doFilter(request, response);
-            }else{
+            }else{             
                 req.setAttribute("msg", "Autenticação necessária");
                 req.getRequestDispatcher("index.jsp").forward(request, response);
             }

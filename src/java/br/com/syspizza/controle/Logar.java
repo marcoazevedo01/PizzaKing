@@ -31,12 +31,12 @@ public class Logar extends HttpServlet {
             
             if(clienteLogado.getId() != null){           
                 HttpSession sessao = request.getSession(true);
-                sessao.setAttribute("nome", clienteLogado.getNome());
-                          
-                request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+                sessao.setAttribute("nome", clienteLogado.getNome());  
+                request.setAttribute("acesso", "Sair");
+                request.getRequestDispatcher("dashboard").forward(request, response);
             }else{
                 request.setAttribute("msg", "E-mail ou senha incorretos!");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                request.getRequestDispatcher("/").forward(request, response);
             }
 
         } catch (Exception e) {

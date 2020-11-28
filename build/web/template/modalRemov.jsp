@@ -12,7 +12,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <a type="button" id="a-excluir" class="btn btn-danger" >Excluir</a> 
+                <button type="button" id="a-excluir" class="btn btn-danger" >Excluir</button> 
             </div>
         </div>
     </div>

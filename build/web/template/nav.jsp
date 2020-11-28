@@ -38,7 +38,7 @@
                             <a class="nav-link" href="index.jsp#food-menu">Cardápio</a>
                         </li>
                         <li class="nav-item">                 
-                            <a class="nav-link" href="dashboard">Login</a> 
+                            <a class="nav-link" href="${acesso}">${acesso}</a> 
                         </li>
                     </ul>
                 </div>

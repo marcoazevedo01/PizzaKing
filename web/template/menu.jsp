@@ -10,6 +10,9 @@
         </div>
         <div id="collapseOne" class="collapse text-right" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card">
+                <a href="dashboard" class="list-group-item list-group-item-action bg-light">Dashboard</a> 
+            </div>
+            <div class="card">
                 <a href="ListarFuncionario" class="list-group-item list-group-item-action bg-light">Gerenciar Funcionário</a> 
             </div>
             <div class="card">
@@ -20,9 +23,6 @@
             </div>
             <div class="card">
                 <a href="ListarBebida" class="list-group-item list-group-item-action bg-light">Gerenciar Bebida</a> 
-            </div>
-             <div class="card">
-                <a href="Sair" class="list-group-item list-group-item-action bg-light">Sair</a> 
             </div>
         </div>
     </div>

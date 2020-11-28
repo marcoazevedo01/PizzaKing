@@ -37,6 +37,7 @@ public class CadastrarCliente extends HttpServlet {
                 if (id.equals("")) {
                     if (dao.cadastrar(cliente)) {
                         mensagem = "Cliente cadastrado com sucesso";
+                        request.getRequestDispatcher("mailer").forward(request, response);
                     } else {
                         mensagem = "Erro ao cadastrar cliente";
                     }
@@ -48,9 +49,8 @@ public class CadastrarCliente extends HttpServlet {
                         mensagem = "Erro ao alterar Cliente!";
                     }
                 }
-                //request.setAttribute("msg", mensagem); 
-                request.getRequestDispatcher("mailer").forward(request, response);
-
+                request.setAttribute("msg", mensagem); 
+                request.getRequestDispatcher("ListarCliente").forward(request, response);                      
             } else {            
                 mensagem = "CPF invalido";
                 request.setAttribute("msg", mensagem);

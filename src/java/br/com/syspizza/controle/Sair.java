@@ -18,7 +18,8 @@ public class Sair extends HttpServlet {
         HttpSession sessao = request.getSession(true);
         sessao.invalidate();
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.setAttribute("acesso", "dashboard");
+        request.getRequestDispatcher("/").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
